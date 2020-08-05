@@ -94,6 +94,7 @@ const data = [
   Your component is a function that takes an article object as its only argument,
   and returns a DOM node looking like the one below:
 
+
   <div class="article">
     <h2>{title of the article}</h2>
     <p class="date">{date of the article}</p>
@@ -106,7 +107,7 @@ const data = [
   Step 2: Still inside `articleMaker`, add an event listener to the span.expandButton.
   This listener should toggle the class 'article-open' on div.article.
 
-  Step 3: Don't forget to return something from your function!
+  X Step 3: Don't forget to return something from your function!
 
   Step 4: Outside your function now, loop over the data. At each iteration you'll use your component
   to create a div.article element and append it to the DOM inside div.articles (see index.html).
@@ -114,3 +115,81 @@ const data = [
   Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
   Refresh the page to see the new article.
 */
+
+const articleMaker = (articleObj) => {
+
+  const article = document.createElement('div');
+  const articleTitle = document.createElement('h2');
+  const date = document.createElement('p');
+  const p1 = document.createElement('p');
+  const p2 = document.createElement('p');
+  const p3 = document.createElement('p');
+  const expandButton = document.createElement('span');
+
+  article.appendChild(articleTitle);
+  article.appendChild(date);
+  article.appendChild(p1);
+  article.appendChild(p2);
+  article.appendChild(p3);
+  article.appendChild(expandButton);
+
+  article.classList.add('article');
+  date.classList.add('date');
+  expandButton.classList.add('expandButton');
+
+  articleTitle.textcontent = articleObj.title;
+  date.textContent = articleObj.date;
+  p1.textContent = articleObj.firstParagraph;
+  p2.textContent = articleObj.secondParagraph;
+  p3.textContent = articleObj.thirdParagraph;
+  expandButton.textContent = '↓'
+
+  expandButton.addEventListener('click', () => {
+    article.classList.toggle('article-open')
+  });
+
+  return article
+
+}
+
+
+
+const articles = document.querySelector('.articles');
+
+data.forEach(article => {
+  articles.appendChild(articleMaker(article));
+});
+
+const littleStar = {
+  title: 'A good song',
+  date: '31899',
+  firstParagraph: `Twinkle twinkle`,
+
+  secondParagraph: `little star`,
+
+  thirdParagraph: `how i wonder what you are!`
+}
+
+const littleStar1 = {
+  title: 'A good song',
+  date: '31899234',
+  firstParagraph: `Twinkle twinkle`,
+
+  secondParagraph: `little star`,
+
+  thirdParagraph: `how i wonder what you are!`
+}
+
+const littleStar2 = {
+  title: 'A good song',
+  date: '31899123',
+  firstParagraph: `Twinkle twinkle`,
+
+  secondParagraph: `little star`,
+
+  thirdParagraph: `how i wonder what you are!`
+}
+
+articles.appendChild(articleMaker(littleStar));
+articles.appendChild(articleMaker(littleStar1));
+articles.appendChild(articleMaker(littleStar2));
